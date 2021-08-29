@@ -1,12 +1,7 @@
-#ifndef RAY_CORE_H_
-#define RAY_CORE_H_
+#pragma once
 
-#include <fixfpvec.h>
-
-static constexpr u32 FPT_SHIFT = 12;
-
-using fpt = fixfp<FPT_SHIFT>;
-using fpt3 = fixfp3<FPT_SHIFT>;
+#include <fixfp_types.h>
+#include <rgb5.h>
 
 struct Ray {
 	fpt3 o, d;
@@ -20,7 +15,16 @@ struct Ray {
 struct RayHit {
 	fpt3 n;
 	fpt t;
+	fpt3 color;
 };
+
+static inline Ray MirrorReflect(RayHit const &h, Ray const &r)
+{
+	Ray refl;
+	refl.o = r.o + h.t * r.d;
+	refl.d = reflect(r.d, h.n);
+	return refl;
+}
 
 struct Shape {
 	virtual bool Hit(Ray const &r, fpt tmin, fpt tmax,
@@ -56,5 +60,3 @@ struct Camera {
 		return Ray{ .o = pos, .d = x * axis_x + y * axis_y + dir };
 	}
 };
-
-#endif

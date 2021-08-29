@@ -34,7 +34,8 @@ ARCH	:=	-mthumb -mthumb-interwork
 
 CFLAGS	:=	-g -Wall \
 		-mcpu=arm7tdmi -mtune=arm7tdmi\
-		$(ARCH)
+		$(ARCH) \
+		-Wno-array-bounds -Wno-stringop-overflow
 
 #CFLAGS  +=	-O0
 #CFLAGS	+=	-O3 -DNDEBUG

@@ -1,12 +1,12 @@
+#pragma once
+
 extern "C" {
-#include <gba_video.h>
-#include <gba_console.h>
-#include <gba_interrupt.h>
-#include <gba_systemcalls.h>
-#include <gba_input.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <gba_types.h>
 };
+#include <config.h>
+
+typedef uint64_t u64;
+typedef int64_t s64;
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(*(arr)))
 
